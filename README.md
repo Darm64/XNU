@@ -1,8 +1,9 @@
 Build Status
 ===========
-| | **XNU** |
-|---|:---:|
-|**macOS x86_64**         |[![Build Status](https://travis-ci.org/aBradleyUno/RaspberryPi-XNU.svg?branch=master)](https://travis-ci.org/aBradleyUno/RaspberryPi-XNU)
+| **Build Platform**| **Target Arch** | **XNU** |
+|---|---|:---:|
+|**macOS**| **x86_64**         |[![Build Status](https://travis-ci.org/aBradleyUno/RaspberryPi-XNU.svg?branch=xnu-4570.1.46_x86-64)](https://travis-ci.org/aBradleyUno/RaspberryPi-XNU)
+|**macOS**| **arm64**         |[![Build Status](https://travis-ci.org/aBradleyUno/RaspberryPi-XNU.svg?branch=xnu-4570.1.46_ARM64)](https://travis-ci.org/aBradleyUno/RaspberryPi-XNU)
 
 What is XNU?
 ===========
