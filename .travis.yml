@@ -37,4 +37,4 @@ install:
   - cd ../..
 
 script:
-  - make -j$(sysctl -n hw.ncpu) SDKROOT=macosx ARCH_CONFIGS=ARM64 KERNEL_CONFIGS="DEBUG" RASPBERRYPI=1
+  - make -j$(sysctl -n hw.ncpu) SDKROOT=macosx ARCH_CONFIGS=ARM64 KERNEL_CONFIGS="RELEASE" RASPBERRYPI=1
