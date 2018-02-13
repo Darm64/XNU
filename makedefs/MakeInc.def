@@ -190,7 +190,13 @@ endef
 
 ARCH_FLAGS_X86_64	  = -arch x86_64
 ARCH_FLAGS_X86_64H	  = -arch x86_64h
+ARCH_FLAGS_ARM			= -arch arm
+ARCH_FLAGS_ARM64		= -arch arm64
 
+
+ifdef RASPBERRYPI
+ARCH_FLAGS_ARM64		+= -DRASPBERRYPI -DDCONFIG_EMBEDDED -mkernel
+endif
 
 
 #
