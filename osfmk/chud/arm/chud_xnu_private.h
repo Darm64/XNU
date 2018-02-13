@@ -61,3 +61,5 @@ typedef struct {
 extern void chudxnu_cpu_signal_handler(void);
 
 #endif /* _ARM_CHUD_XNU_PRIVATE_H_ */
+
+void memset_pattern16(void);

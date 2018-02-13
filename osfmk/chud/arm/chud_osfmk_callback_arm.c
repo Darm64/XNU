@@ -51,8 +51,12 @@
 #include <arm/machine_cpu.h>
 
 #include <sys/kdebug.h>
+
 __private_extern__ void
 chudxnu_cpu_signal_handler(void)
 {
 
+}
+
+void memset_pattern16() {
 }
