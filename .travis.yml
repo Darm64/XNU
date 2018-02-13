@@ -9,7 +9,7 @@ before_install:
   - curl https://opensource.apple.com/tarballs/dtrace/dtrace-262.tar.gz | tar -xf-
   - curl https://opensource.apple.com/tarballs/AvailabilityVersions/AvailabilityVersions-32.tar.gz | tar -xf-
   - curl https://opensource.apple.com/tarballs/libplatform/libplatform-161.tar.gz | tar -xf-
-  - curl https://opensource.apple.com/tarballs/libdispatch/libdispatch-913.1.6.tar.gz | tar -xf-
+  - git clone https://github.com/Proteas/install_firehose_lib
 
 install:
   - cd dtrace-262
@@ -32,11 +32,9 @@ install:
   - cd libplatform-161
   - sudo ditto "${PWD}/include" "${SDKPATH}/usr/local/include"
   - sudo ditto "${PWD}/private"  "${SDKPATH}/usr/local/include"
-  - cd ../libdispatch-913.1.6
-  - mkdir -p obj sym dst
-  - xcodebuild install -project libdispatch.xcodeproj -target libfirehose_kernel -sdk macosx ARCHS="x86_64 i386" SRCROOT="${PWD}" OBJROOT="${PWD}/obj" SYMROOT="${PWD}/sym" DSTROOT="${PWD}/dst"
-  - sudo ditto "${PWD}/dst/usr/local" "${SDKPATH}/usr/local"
+  - cd ../install_firehose_lib
+  - sudo ./install-firehose.sh
   - cd ../..
 
 script:
-  - make -j$(sysctl -n hw.ncpu) SDKROOT=macosx ARCH_CONFIGS=ARM64 KERNEL_CONFIGS="DEBUG" RASPBERRYPI=1 
+  - make -j$(sysctl -n hw.ncpu) SDKROOT=macosx ARCH_CONFIGS=ARM64 KERNEL_CONFIGS="DEBUG" RASPBERRYPI=1
