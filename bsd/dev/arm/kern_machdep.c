@@ -69,8 +69,6 @@ grade_binary(cpu_type_t exectype, cpu_subtype_t execsubtype)
 			}
 			break;
 
-
-		break;
 #else /* __arm64__ */
 
 	case CPU_TYPE_ARM:
@@ -105,7 +103,7 @@ v7s:
 			case CPU_SUBTYPE_ARM_V7K:
 				return 6;
 			}
-			break;	
+			break;
 
 		/*
 		 * For Cortex A9, we prefer the A9 slice, but will run v7 albeit
@@ -163,6 +161,7 @@ v7:
 			break;
 		}
 #endif /* __arm64__ */
+	}
 	}
 
 	return 0;
