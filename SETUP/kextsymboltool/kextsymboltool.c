@@ -2,14 +2,14 @@
  * Copyright (c) 2006 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
  * compliance with the License. Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this
  * file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -17,7 +17,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_LICENSE_HEADER_END@
  */
 #include <libc.h>
@@ -126,7 +126,7 @@ readFile(const char *path, vm_offset_t * objAddr, vm_size_t * objSize)
 	if(fstat(fd, &stat_buf) == -1)
 	    continue;
 
-        if (0 == (stat_buf.st_mode & S_IFREG)) 
+        if (0 == (stat_buf.st_mode & S_IFREG))
             continue;
 
        /* Don't try to map an empty file, it fails now due to conformance
@@ -274,7 +274,7 @@ count_symbols(char * file, vm_size_t file_size)
         }
         nsyms++;
     }
-    
+
     return nsyms;
 }
 
@@ -450,7 +450,7 @@ store_symbols(char * file, vm_size_t file_size, struct symbol * symbols, uint32_
         if (indirect_term) {
             *indirect_term = '\0';
         }
-        
+
         symbols[idx].name = name;
         symbols[idx].name_len = name_len;
         symbols[idx].indirect = indirect;
@@ -474,6 +474,8 @@ lookup_arch(const char *archstring)
 	static const NXArchInfo archlist[] = {
 		{ "x86_64", 0x01000007 /* CPU_TYPE_X86_64 */, 3 /* CPU_SUBTYPE_X86_64_ALL */, NX_LittleEndian, NULL },
 		{ "x86_64h", 0x01000007 /* CPU_TYPE_X86_64 */, 8 /* CPU_SUBTYPE_X86_64_H */, NX_LittleEndian, NULL },
+    {"arm", 0x00000012 /* CPU_TYPE_ARM */, 0, NX_LittleEndian, NULL },
+    {"arm64", 0x01000012 /* CPU_TYPE_ARM64 */, 0, NX_LittleEndian, NULL },
 	};
 	unsigned long i;
 
@@ -515,7 +517,7 @@ int main(int argc, char * argv[])
 	const char * path;
     };
     struct file files[64];
-    
+
     host_arch = NXGetLocalArchInfo();
     target_arch = host_arch;
 
@@ -653,7 +655,7 @@ int main(int argc, char * argv[])
 		struct bsearch_key key;
 		key.name = name;
 		key.name_len = len;
-		result = bsearch(&key, import_symbols, 
+		result = bsearch(&key, import_symbols,
 				    num_import_syms, sizeof(struct symbol), &bsearch_cmp_prefix);
 
 		if (result)
@@ -687,13 +689,13 @@ int main(int argc, char * argv[])
 		}
 	    }
 	    else
-		result = bsearch(name, import_symbols, 
+		result = bsearch(name, import_symbols,
 				    num_import_syms, sizeof(struct symbol), &bsearch_cmp);
 
 	    if (!result && require_imports)
 	    {
 		int status;
-		char * demangled_result = 
+		char * demangled_result =
 			__cxa_demangle(export_symbols[export_idx].name + 1, NULL, NULL, &status);
 		fprintf(stderr, "exported name not in import list: %s\n",
 					demangled_result ? demangled_result : export_symbols[export_idx].name);
@@ -776,7 +778,7 @@ int main(int argc, char * argv[])
         segcmd.flags    = SG_NORELOC;
 
 	symcmd.symoff	= symsoffset;
-	symcmd.stroff	= result_count * sizeof(struct nlist_64) 
+	symcmd.stroff	= result_count * sizeof(struct nlist_64)
 				+ symcmd.symoff;
 
 	if (target_arch->byteorder != host_arch->byteorder)
@@ -816,7 +818,7 @@ int main(int argc, char * argv[])
         segcmd.flags    = SG_NORELOC;
 
 	symcmd.symoff	= symsoffset;
-	symcmd.stroff	= result_count * sizeof(struct nlist) 
+	symcmd.stroff	= result_count * sizeof(struct nlist)
 				+ symcmd.symoff;
 
 	if (target_arch->byteorder != host_arch->byteorder)
@@ -870,7 +872,7 @@ int main(int argc, char * argv[])
 
 	    if (export_symbols[export_idx].list != &export_symbols[export_idx])
 	    {
-		printf("wild: %s, %s\n", export_symbols[export_idx].name, 
+		printf("wild: %s, %s\n", export_symbols[export_idx].name,
 			export_symbols[export_idx].list[import_idx].name);
 	    }
 	    if (CPU_ARCH_ABI64 & target_arch->cputype)
@@ -881,7 +883,7 @@ int main(int argc, char * argv[])
                 nl.n_desc  = 0;
 		nl.n_un.n_strx = strx;
 		strx += export_symbols[export_idx].list[import_idx].name_len;
-                
+
                 if (export_symbols[export_idx].flags & kObsolete) {
                     nl.n_desc |= N_DESC_DISCARDED;
                 }
@@ -911,7 +913,7 @@ int main(int argc, char * argv[])
 		nl.n_desc  = 0;
 		nl.n_un.n_strx = strx;
 		strx += export_symbols[export_idx].list[import_idx].name_len;
- 
+
                 if (export_symbols[export_idx].flags & kObsolete) {
                     nl.n_desc |= N_DESC_DISCARDED;
                 }
@@ -951,13 +953,13 @@ int main(int argc, char * argv[])
 
 	for (import_idx = 0; import_idx < export_symbols[export_idx].list_count; import_idx++)
 	{
-	    err = writeFile(fd, export_symbols[export_idx].list[import_idx].name, 
+	    err = writeFile(fd, export_symbols[export_idx].list[import_idx].name,
 			export_symbols[export_idx].list[import_idx].name_len);
 	    if (kErrorNone != err)
 		goto finish;
 	    if (export_symbols[export_idx].list[import_idx].indirect)
 	    {
-		err = writeFile(fd, export_symbols[export_idx].list[import_idx].indirect, 
+		err = writeFile(fd, export_symbols[export_idx].list[import_idx].indirect,
 			    export_symbols[export_idx].list[import_idx].indirect_len);
 		if (kErrorNone != err)
 		    goto finish;
@@ -968,7 +970,7 @@ int main(int argc, char * argv[])
     err = writeFile(fd, &zero, strtabpad - strtabsize);
     if (kErrorNone != err)
 	goto finish;
-	
+
     close(fd);
 
 
@@ -994,4 +996,3 @@ finish:
         exit(0);
     return(0);
 }
-

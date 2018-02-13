@@ -52,7 +52,7 @@ SYMBOL_SET_BUILD = $(foreach symbolset, $(SYMBOL_COMPONENT_LIST), $(OBJPATH)/$(s
 
 $(OBJPATH)/allsymbols: $(OBJPATH)/$(KERNEL_FILE_NAME)
 	$(_v)$(NM) -gj $< > $@
-
+ARCH_FLAGS_ARM64		= -arch arm64
 $(SYMBOL_SET_BUILD): $(OBJPATH)/%.symbolset :  %.exports %.$(EXPORT_SOURCE_ARCH_CONFIG_LC).exports $(OBJPATH)/allsymbols $(KEXT_CREATE_SYMBOL_SET)
 	@echo "$(ColorH)SYMBOLSET$(Color0)  $(ColorF)$*$(Color0) \"($(ColorLF)$(CURRENT_ARCH_CONFIG_LC)$(Color0))\""
 	$(_v)$(KEXT_CREATE_SYMBOL_SET)					\
