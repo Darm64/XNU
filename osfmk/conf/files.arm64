@@ -84,8 +84,6 @@ osfmk/arm64/kpc.c		optional kpc
 
 osfmk/arm64/monotonic_arm64.c optional monotonic
 
-osfmk/arm64/platform_tests.c	optional config_xnupost
-
 osfmk/arm64/alternate_debugger.c		optional alternate_debugger
 osfmk/arm64/alternate_debugger_asm.s		optional alternate_debugger
 
