@@ -1,4 +1,3 @@
-// TODO Unknown functionality
 #include <mach/mach_types.h>
 #include <chud/chud_xnu.h>
 
