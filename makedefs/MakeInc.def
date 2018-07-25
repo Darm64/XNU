@@ -152,8 +152,7 @@ WARNFLAGS_STD := \
 	-Wno-variadic-macros \
 	-Wno-vla \
 	-Wno-zero-length-array \
-	-Wno-zero-length-array \
-	-Wno-zero-as-null-pointer-constant
+	-Wno-zero-length-array
 
 CWARNFLAGS_STD = \
 	$(WARNFLAGS_STD) \
