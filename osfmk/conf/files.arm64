@@ -62,9 +62,7 @@ osfmk/arm/status_shared.c	standard
 
 osfmk/arm/commpage/commpage.c	standard
 
-osfmk/chud/arm/chud_osfmk_callback_arm.c	standard
 osfmk/chud/arm/chud_cpu_arm.c			standard
-osfmk/chud/arm/chud_thread_arm.c		standard
 
 osfmk/kdp/ml/arm/kdp_machdep.c	optional	mach_kdp
 osfmk/kdp/ml/arm/kdp_vm.c	optional	mach_kdp
