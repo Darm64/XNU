@@ -1,9 +1,12 @@
 Build Status
 ===========
-| **Build Platform**| **Target Arch** | **XNU** |
-|---|---|:---:|
-|**macOS**| **x86_64**         |[![Build Status](https://xnu.lexully.com/buildStatus/icon?job=XNU_x86-64h&.png)](https://xnu.lexully.com/job/XNU_x86-64h)
-|**macOS**| **arm64**         |[![Build Status](https://xnu.lexully.com/buildStatus/icon?job=XNU_RaspberryPi&.png)](https://xnu.lexully.com/job/XNU_RaspberryPi)
+| **Build Platform**| **SDK** | **Target Configuration** | **XNU** |
+|---|---|---|:---:|
+|**macOS**| **iPhoneOS** | **RELEASE ARM64**         |[![Build Status](https://xnu.lexully.com/buildStatus/icon?job=XNU_iphoneos_release_arm64&.png)](https://xnu.lexully.com/job/XNU_iphoneos_release_arm64/)
+|**macOS**| **iPhoneOS** | **DEBUG ARM64**         |[![Build Status](https://xnu.lexully.com/buildStatus/icon?job=XNU_iphoneos_debug_arm64&.png)](https://xnu.lexully.com/job/XNU_iphoneos_debug_arm64/)
+|**macOS**| **macOS** | **RELEASE ARM64**         |[![Build Status](https://xnu.lexully.com/buildStatus/icon?job=XNU_macosx_release_arm64&.png)](https://xnu.lexully.com/job/XNU_macosx_release_arm64/)
+|**macOS**| **macOS** | **DEBUG ARM64**         |[![Build Status](https://xnu.lexully.com/buildStatus/icon?job=XNU_macosx_debug_arm64&.png)](https://xnu.lexully.com/job/XNU_macosx_debug_arm64/)
+
 
 What is XNU?
 ===========
