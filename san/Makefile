@@ -34,7 +34,7 @@ $(OBJROOT)/san/kasan-blacklist-%: $(SOURCE)/kasan-blacklist $(SOURCE)/kasan-blac
 	@echo "$(ColorH)GENERATING$(Color0)    $(ColorLF)$(notdir $@)$(Color0)"
 	$(_v)sed -e 's,^src:\./,src:'"$(SRCROOT)/," $^ > $@
 
-do_build_setup:: $(OBJROOT)/san/kasan-blacklist-x86_64
+do_build_setup:: $(OBJROOT)/san/kasan-blacklist-$(CURRENT_ARCH_CONFIG_LC)
 
 
 #

@@ -9,7 +9,7 @@
 #
 # Architecture Configuration options
 #
-SUPPORTED_ARCH_CONFIGS := X86_64 X86_64H ARM64 ARM64 ARM ARM
+SUPPORTED_ARCH_CONFIGS := X86_64 X86_64H ARM64 ARM
 
 #
 # Kernel Configuration options
@@ -62,7 +62,7 @@ else ifeq ($(PLATFORM),tvOS)
 else ifeq ($(PLATFORM),AppleTVOS)
     DEPLOYMENT_TARGET_FLAGS = -mtvos-version-min=$(SDKVERSION)
 else ifeq ($(PLATFORM),BridgeOS)
-    DEPLOYMENT_TARGET_FLAGS = -mbridgeos-version-min=$(SDKVERSION)
+		DEPLOYMENT_TARGET_FLAGS = -mbridgeos-version-min=$(SDKVERSION) -DXNU_TARGET_OS_BRIDGE
 else ifneq ($(filter $(SUPPORTED_EMBEDDED_PLATFORMS),$(PLATFORM)),)
     DEPLOYMENT_TARGET_FLAGS = -miphoneos-version-min=$(SDKVERSION)
 else ifneq ($(filter $(SUPPORTED_SIMULATOR_PLATFORMS),$(PLATFORM)),)
@@ -151,7 +151,9 @@ WARNFLAGS_STD := \
 	-Wno-used-but-marked-unused \
 	-Wno-variadic-macros \
 	-Wno-vla \
-	-Wno-zero-length-array
+	-Wno-zero-length-array \
+	-Wno-zero-length-array \
+	-Wno-zero-as-null-pointer-constant
 
 CWARNFLAGS_STD = \
 	$(WARNFLAGS_STD) \
@@ -193,11 +195,10 @@ ARCH_FLAGS_X86_64H	  = -arch x86_64h
 ARCH_FLAGS_ARM			= -arch arm
 ARCH_FLAGS_ARM64		= -arch arm64
 
-
-ifdef RASPBERRYPI
-CFLAGS_ARM 	+= -DRASPBERRYPI -DCONFIG_EMBEDDED
-CFLAGS_ARM64	+= -DRASPBERRYPI -DCONFIG_EMBEDDED
-endif
+# ToDo
+CFLAGS_ARM 	+= -Darm -DARM -D__arm__ -D__ARM__ -DLP32 -mkernel -DCONFIG_EMBEDDED
+CFLAGS_ARM64	= -Darm64 -DARM64 -D__arm64__ -D__ARM64__ -DLP64 \
+		  -DCONFIG_EMBEDDED -mkernel -DARM64_BOARD_CONFIG_T8011=1
 
 
 #
@@ -252,6 +253,13 @@ CFLAGS_KASANX86_64H = $(CFLAGS_DEVELOPMENTX86_64H)
 CFLAGS_DEBUGX86_64H = -O0
 CFLAGS_PROFILEX86_64H = -O2
 
+CFLAGS_RELEASEARM64 = -O2
+CFLAGS_DEVELOPMENTARM64 = -O2
+CFLAGS_KASANARM64 = $(CFLAGS_DEVELOPMENTARM64)
+# No space optimization for the DEBUG kernel for the benefit of gdb:
+CFLAGS_DEBUGARM64 = -O0
+CFLAGS_PROFILEARM64 = -O2
+
 CFLAGS_RELEASEARM = -O2
 CFLAGS_DEVELOPMENTARM = -O2
 CFLAGS_DEBUGARM = -O0
@@ -273,6 +281,7 @@ ifeq ($(KASAN),1)
 BUILD_LTO = 0
 KASAN_SHIFT_X86_64=0xdffffe1000000000
 KASAN_SHIFT_X86_64H=$(KASAN_SHIFT_X86_64)
+KASAN_SHIFT_ARM64=$(KASAN_SHIFT_ARM64)
 KASAN_SHIFT=$($(addsuffix $(CURRENT_ARCH_CONFIG),KASAN_SHIFT_))
 KASAN_BLACKLIST=$(OBJROOT)/san/kasan-blacklist-$(CURRENT_ARCH_CONFIG_LC)
 CFLAGS_GEN += -DKASAN=1 -DKASAN_SHIFT=$(KASAN_SHIFT) -fsanitize=address \
@@ -423,6 +432,8 @@ endif
 # Define KERNEL_BASE_OFFSET so known at compile time:
 CFLAGS_X86_64 += -DKERNEL_BASE_OFFSET=$(KERNEL_BASE_OFFSET)
 CFLAGS_X86_64H += -DKERNEL_BASE_OFFSET=$(KERNEL_BASE_OFFSET)
+CFLAGS_ARM += -DKERNEL_BASE_OFFSET=$(KERNEL_BASE_OFFSET)
+CFLAGS_ARM64 += -DKERNEL_BASE_OFFSET=$(KERNEL_BASE_OFFSET)
 
 LDFLAGS_KERNEL_DEBUGX86_64 = $(LDFLAGS_KERNEL_RELEASEX86_64)
 LDFLAGS_KERNEL_DEVELOPMENTX86_64 = $(LDFLAGS_KERNEL_RELEASEX86_64)
@@ -434,6 +445,42 @@ LDFLAGS_KERNEL_DEBUGX86_64H = $(LDFLAGS_KERNEL_RELEASEX86_64H)
 LDFLAGS_KERNEL_DEVELOPMENTX86_64H = $(LDFLAGS_KERNEL_RELEASEX86_64H)
 LDFLAGS_KERNEL_KASANX86_64H = $(LDFLAGS_KERNEL_RELEASEX86_64H)
 LDFLAGS_KERNEL_PROFILEX86_64H = $(LDFLAGS_KERNEL_RELEASEX86_64H)
+
+LDFLAGS_KERNEL_RELEASEARM64 = \
+	-Wl,-pie \
+	-Wl,-static \
+	-Wl,-segaddr,__HIB,$(KERNEL_HIB_SECTION_BASE) \
+	-Wl,-image_base,$(KERNEL_TEXT_BASE) \
+	-Wl,-seg_page_size,__TEXT,0x200000 \
+	-Wl,-sectalign,__HIB,__bootPT,0x1000 \
+	-Wl,-sectalign,__HIB,__desc,0x1000 \
+	-Wl,-sectalign,__HIB,__data,0x1000 \
+	-Wl,-sectalign,__HIB,__text,0x1000 \
+	-Wl,-sectalign,__HIB,__const,0x1000 \
+	-Wl,-sectalign,__HIB,__bss,0x1000 \
+	-Wl,-sectalign,__HIB,__common,0x1000 \
+	-Wl,-sectalign,__HIB,__llvm_prf_cnts,0x1000 \
+	-Wl,-sectalign,__HIB,__llvm_prf_names,0x1000 \
+	-Wl,-sectalign,__HIB,__llvm_prf_data,0x1000 \
+	-Wl,-sectalign,__HIB,__textcoal_nt,0x1000 \
+	-Wl,-rename_section,__DATA,__const,__CONST,__constdata \
+	-Wl,-no_zero_fill_sections \
+	$(LDFLAGS_NOSTRIP_FLAG)
+
+ifeq ($(KASAN),1)
+LDFLAGS_KERNEL_RELEASEARM64 += \
+	-Wl,-sectalign,__HIB,__cstring,0x1000 \
+	-Wl,-sectalign,__HIB,__asan_globals,0x1000 \
+	-Wl,-sectalign,__HIB,__asan_liveness,0x1000 \
+	-Wl,-sectalign,__HIB,__mod_term_func,0x1000 \
+	-Wl,-rename_section,__HIB,__mod_init_func,__NULL,__mod_init_func \
+	-Wl,-rename_section,__HIB,__eh_frame,__NULL,__eh_frame
+endif
+
+LDFLAGS_KERNEL_DEBUGARM64 = $(LDFLAGS_KERNEL_RELEASEARM64)
+LDFLAGS_KERNEL_DEVELOPMENTARM64 = $(LDFLAGS_KERNEL_RELEASEARM64)
+LDFLAGS_KERNEL_KASANARM64 = $(LDFLAGS_KERNEL_RELEASEARM64)
+LDFLAGS_KERNEL_PROFILEARM64 = $(LDFLAGS_KERNEL_RELEASEARM64)
 
 
 LDFLAGS_KERNEL	= $(LDFLAGS_KERNEL_GEN) \
@@ -628,6 +675,9 @@ DSYMUTIL_FLAGS_GEN	= --minimize
 DSYMUTIL_FLAGS_X86_64	= --arch=x86_64
 DSYMUTIL_FLAGS_X86_64H	= --arch=x86_64h
 
+DSYMUTIL_FLAGS_ARM	= --arch=arm
+DSYMUTIL_FLAGS_ARM64	= --arch=arm64
+
 DSYMUTIL_FLAGS = $(DSYMUTIL_FLAGS_GEN) \
 	$($(addsuffix $(CURRENT_ARCH_CONFIG),DSYMUTIL_FLAGS_))
 
@@ -705,7 +755,6 @@ INSTALL_KERNEL_DIR := $(DEVELOPER_EXTRAS_DIR)
 INSTALL_KERNEL_SYM_DIR := $(DEVELOPER_EXTRAS_DIR)
 INSTALL_KERNEL_SYM_TO_KDK = 1
 INSTALL_XNU_DEBUG_FILES = 1
-else ifeq ($(RC_ProjectName),xnu_kasan)
 ifeq ($(filter $(SUPPORTED_EMBEDDED_PLATFORMS),$(PLATFORM)),)
 # MacOS
 INSTALL_KERNEL_DIR := $(DEVELOPER_EXTRAS_DIR)
@@ -722,6 +771,11 @@ else ifeq ($(PLATFORM),MacOSX)
 INSTALL_KERNEL_DIR := $(SYSTEM_LIBRARY_KERNELS_DIR)
 INSTALL_KERNEL_SYM_DIR := $(SYSTEM_LIBRARY_KERNELS_DIR)
 INSTALL_KERNEL_SYM_TO_KDK = $(if $(filter YES,$(DWARF_DSYM_FILE_SHOULD_ACCOMPANY_PRODUCT)),1,0)
+endif
+
+
+ifeq ($(RC_ProjectName),xnu_kasan)
+INSTALL_KASAN_ONLY = 1
 endif
 
 # vim: set ft=make:

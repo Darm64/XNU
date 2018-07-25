@@ -68,7 +68,7 @@ grade_binary(cpu_type_t exectype, cpu_subtype_t execsubtype)
 				return 8;
 			}
 			break;
-
+}
 #else /* __arm64__ */
 
 	case CPU_TYPE_ARM:
