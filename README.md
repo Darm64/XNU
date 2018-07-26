@@ -1,3 +1,13 @@
+Build Status
+===========
+| **Build Platform**| **SDK** | **Target Configuration** | **XNU** |
+|---|---|---|:---:|
+|**macOS**| **iPhoneOS** | **RELEASE ARM64**         |[![Build Status](https://xnu.lexully.com/buildStatus/icon?job=XNU_iphoneos_release_arm64&.png)](https://xnu.lexully.com/job/XNU_iphoneos_release_arm64/)
+|**macOS**| **iPhoneOS** | **DEBUG ARM64**         |[![Build Status](https://xnu.lexully.com/buildStatus/icon?job=XNU_iphoneos_debug_arm64&.png)](https://xnu.lexully.com/job/XNU_iphoneos_debug_arm64/)
+|**macOS**| **macOS** | **RELEASE ARM64**         |[![Build Status](https://xnu.lexully.com/buildStatus/icon?job=XNU_macosx_release_arm64&.png)](https://xnu.lexully.com/job/XNU_macosx_release_arm64/)
+|**macOS**| **macOS** | **DEBUG ARM64**         |[![Build Status](https://xnu.lexully.com/buildStatus/icon?job=XNU_macosx_debug_arm64&.png)](https://xnu.lexully.com/job/XNU_macosx_debug_arm64/)
+
+
 What is XNU?
 ===========
 
@@ -103,7 +113,7 @@ kernel together into a single bootable image.
 To build a kernelcache you can use the following mechanisms:
 
   * Using automatic kernelcache generation with `kextd`.
-    The kextd daemon keeps watching for changing in `/System/Library/Extensions` directory. 
+    The kextd daemon keeps watching for changing in `/System/Library/Extensions` directory.
     So you can setup new kernel as
 
         $ cp BUILD/obj/DEVELOPMENT/X86_64/kernel.development /System/Library/Kernels/
@@ -161,7 +171,7 @@ Coding styles (Reindenting files)
 
 Source files can be reindented using clang-format setup in .clang-format.
 XNU follows a variant of WebKit style for source code formatting.
-Please refer to format styles at [WebKit website](http://www.webkit.org/coding/coding-style.html). 
+Please refer to format styles at [WebKit website](http://www.webkit.org/coding/coding-style.html).
 Further options about style options is available at [clang docs](http://clang.llvm.org/docs/ClangFormatStyleOptions.html)
 
   Note: clang-format binary may not be part of base installation. It can be compiled from llvm clang sources and is reachable in $PATH.
@@ -348,7 +358,7 @@ common options.
 To debug a panic'ed kernel, use llvm debugger (lldb) along with unstripped symbol rich kernel binary.
 
     sh$ lldb kernel.development.unstripped
-    
+
 And then you can connect to panic'ed machine with `kdp_remote [ip addr]` or `gdb_remote [hostip : port]` commands.
 
 Each kernel is packaged with kernel specific debug scripts as part of the build process. For security reasons these special commands

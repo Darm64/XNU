@@ -107,3 +107,14 @@
 
 
 #endif /* ! _PEXPERT_ARM_BOARD_CONFIG_H */
+
+#ifdef RASPBERRYPI
+#define APPLE_ARM64_ARCH_FAMILY  1
+#define APPLEHURRICANE
+#define ARM_ARCH_TIMER
+#include <pexpert/arm64/BCM2837.h>
+#define __ARM_L2CACHE_SIZE_LOG__ 23
+#define ARM_BOARD_WFE_TIMEOUT_NS 1000
+#define ARM_BOARD_CLASS_T8011
+#define CPU_COUNT 3
+#endif /* RASPBERRYPI*/

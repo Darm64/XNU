@@ -62,6 +62,8 @@ osfmk/arm/status_shared.c	standard
 
 osfmk/arm/commpage/commpage.c	standard
 
+osfmk/chud/arm/chud_cpu_arm.c			standard
+
 osfmk/kdp/ml/arm/kdp_machdep.c	optional	mach_kdp
 osfmk/kdp/ml/arm/kdp_vm.c	optional	mach_kdp
 
@@ -80,8 +82,6 @@ osfmk/arm64/kpc.c		optional kpc
 
 osfmk/arm64/monotonic_arm64.c optional monotonic
 
-osfmk/arm64/platform_tests.c	optional config_xnupost
-
 osfmk/arm64/alternate_debugger.c		optional alternate_debugger
 osfmk/arm64/alternate_debugger_asm.s		optional alternate_debugger
 
@@ -90,3 +90,6 @@ osfmk/corecrypto/ccn/src/ccn_set.c		standard
 
 osfmk/arm64/pgtrace.c           standard
 osfmk/arm64/pgtrace_decoder.c   optional config_pgtrace_nonkext
+
+osfmk/chud/arm/chud_osfmk_callback_arm.c	standard
+osfmk/chud/arm/chud_thread_arm.c           	standard
