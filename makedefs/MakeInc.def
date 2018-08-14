@@ -151,7 +151,6 @@ WARNFLAGS_STD := \
 	-Wno-used-but-marked-unused \
 	-Wno-variadic-macros \
 	-Wno-vla \
-	-Wno-zero-length-array \
 	-Wno-zero-length-array
 
 CWARNFLAGS_STD = \
