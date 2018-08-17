@@ -364,6 +364,8 @@ LDFLAGS_KERNEL_GEN = \
     -Wl,-sectcreate,__PRELINK_TEXT,__text,/dev/null \
     -Wl,-sectcreate,"__PLK_TEXT_EXEC",__text,/dev/null \
     -Wl,-sectcreate,__PRELINK_DATA,__data,/dev/null \
+    -Wl,-sectcreate,__DATA_CONST,__const,/dev/null \
+    -Wl,-sectcreate,__TEXT_EXEC,__text,/dev/null \
     -Wl,-sectcreate,"__PLK_DATA_CONST",__data,/dev/null \
     -Wl,-sectcreate,"__PLK_LLVM_COV",__llvm_covmap,/dev/null \
     -Wl,-sectcreate,"__PLK_LINKEDIT",__data,/dev/null \

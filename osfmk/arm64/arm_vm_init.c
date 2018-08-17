@@ -1336,7 +1336,7 @@ arm_vm_init(uint64_t memory_size, boot_args * args)
 	vm_kernel_slide = segTEXTB-0xfffffff007004000;
 	vm_kernel_stext = segTEXTB;
 	assert(segDATACONSTB == segTEXTB + segSizeTEXT);
-	 assert(segTEXTEXECB == segDATACONSTB + segSizeDATACONST);
+	assert(segTEXTEXECB == segDATACONSTB + segSizeDATACONST);
 	vm_kernel_etext = segTEXTB + segSizeTEXT + segSizeDATACONST + segSizeTEXTEXEC;
 
 	pmap_bootstrap((gVirtBase+MEM_SIZE_MAX+ ~0xFFFFFFFFFF800000ULL) & 0xFFFFFFFFFF800000ULL);
