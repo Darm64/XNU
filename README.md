@@ -2,7 +2,7 @@ Build Status
 ===========
 | **Build Platform**| **SDK** | **Target Configuration** | **XNU** |
 |---|---|---|:---:|
-|**macOS**| **iPhoneOS** | **RELEASE ARM64**         |[![Build Status](https://xnu.lexully.com/buildStatus/icon?job=XNU_iphoneos_release_arm64&.png)](https://xnu.lexully.com/job/XNU_iphoneos_release_arm64/)
+|**macOS 10.14**| **iPhoneOS** | **RELEASE ARM64**         |[![Build Status](https://xnu.lexully.com/buildStatus/icon?job=XNU_iphoneos_release_arm64&.png)](https://xnu.lexully.com/job/XNU_iphoneos_release_arm64/)
 |**macOS**| **iPhoneOS** | **DEBUG ARM64**         |[![Build Status](https://xnu.lexully.com/buildStatus/icon?job=XNU_iphoneos_debug_arm64&.png)](https://xnu.lexully.com/job/XNU_iphoneos_debug_arm64/)
 |**macOS**| **macOS** | **RELEASE ARM64**         |[![Build Status](https://xnu.lexully.com/buildStatus/icon?job=XNU_macosx_release_arm64&.png)](https://xnu.lexully.com/job/XNU_macosx_release_arm64/)
 |**macOS**| **macOS** | **DEBUG ARM64**         |[![Build Status](https://xnu.lexully.com/buildStatus/icon?job=XNU_macosx_debug_arm64&.png)](https://xnu.lexully.com/job/XNU_macosx_debug_arm64/)
