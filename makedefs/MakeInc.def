@@ -457,7 +457,6 @@ LDFLAGS_KERNEL_RELEASEARM64 = \
 	-Wl,-static \
 	-Wl,-segaddr,__HIB,$(KERNEL_HIB_SECTION_BASE) \
 	-Wl,-image_base,$(KERNEL_TEXT_BASE) \
-	-Wl,-seg_page_size,__TEXT,0x200000 \
 	-Wl,-sectalign,__HIB,__bootPT,0x1000 \
 	-Wl,-sectalign,__HIB,__desc,0x1000 \
 	-Wl,-sectalign,__HIB,__data,0x1000 \
@@ -473,6 +472,7 @@ LDFLAGS_KERNEL_RELEASEARM64 = \
 	-Wl,-no_zero_fill_sections \
 	-Wl,-data_const \
 	-Wl,-text_exec \
+	-Wl,-segment_order,__TEXT:__DATA_CONST:__TEXT_EXEC:__KLD:__LAST:__DATA:__PRELINK_TEXT:__PLK_TEXT_EXEC:__PLK_DATA_CONST:__PRELINK_DATA:__PLK_LLVM_COV:__PLK_LINKEDIT:__PRELINK_INFO \
 	$(LDFLAGS_NOSTRIP_FLAG)
 
 ifeq ($(KASAN),1)
