@@ -113,7 +113,6 @@
 		401BB71A1BCAE57B005080D3 /* os_channel.c in Sources */ = {isa = PBXBuildFile; fileRef = 401BB7161BCAE539005080D3 /* os_channel.c */; settings = {COMPILER_FLAGS = "-fno-builtin"; }; };
 		401BB71C1BCAE57B005080D3 /* os_nexus.c in Sources */ = {isa = PBXBuildFile; fileRef = 401BB7181BCAE539005080D3 /* os_nexus.c */; settings = {COMPILER_FLAGS = "-fno-builtin"; }; };
 		402AF43F1E5CD88600F1A4B9 /* cpu_in_cksum_gen.c in Sources */ = {isa = PBXBuildFile; fileRef = 402AF43E1E5CD88100F1A4B9 /* cpu_in_cksum_gen.c */; settings = {COMPILER_FLAGS = "-fno-builtin"; }; };
-		403C7CEE1E1F4E4400D6FEEF /* os_packet.c in Sources */ = {isa = PBXBuildFile; fileRef = 405FA3381E0C669D007D66EA /* os_packet.c */; settings = {COMPILER_FLAGS = "-fno-builtin"; }; };
 		406E0B721E4ACD2000295EA3 /* cpu_copy_in_cksum.s in Sources */ = {isa = PBXBuildFile; fileRef = 40DD162F1E4ACCAA003297CC /* cpu_copy_in_cksum.s */; };
 		409A78321E4EB3E300E0699B /* cpu_in_cksum.s in Sources */ = {isa = PBXBuildFile; fileRef = 409A78301E4EB3D900E0699B /* cpu_in_cksum.s */; };
 		40DF0F741E5CD7BB0035A864 /* cpu_copy_in_cksum_gen.c in Sources */ = {isa = PBXBuildFile; fileRef = 40DF0F731E5CD7B30035A864 /* cpu_copy_in_cksum_gen.c */; settings = {COMPILER_FLAGS = "-fno-builtin"; }; };
@@ -496,13 +495,6 @@
 		374A36E214748EE400AAF39D /* varargs_wrappers.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = varargs_wrappers.s; sourceTree = "<group>"; };
 		37DDFB7614748713009D3355 /* syscall.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = syscall.map; sourceTree = "<group>"; };
 		3F538F881A659C5600B37EFD /* persona.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = persona.c; sourceTree = "<group>"; };
-		401BB7161BCAE539005080D3 /* os_channel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = os_channel.c; path = skywalk/os_channel.c; sourceTree = "<group>"; };
-		401BB7181BCAE539005080D3 /* os_nexus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = os_nexus.c; path = skywalk/os_nexus.c; sourceTree = "<group>"; };
-		402AF43E1E5CD88100F1A4B9 /* cpu_in_cksum_gen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpu_in_cksum_gen.c; path = skywalk/cpu_in_cksum_gen.c; sourceTree = "<group>"; };
-		405FA3381E0C669D007D66EA /* os_packet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = os_packet.c; path = skywalk/os_packet.c; sourceTree = "<group>"; };
-		409A78301E4EB3D900E0699B /* cpu_in_cksum.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; name = cpu_in_cksum.s; path = skywalk/cpu_in_cksum.s; sourceTree = "<group>"; };
-		40DD162F1E4ACCAA003297CC /* cpu_copy_in_cksum.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; name = cpu_copy_in_cksum.s; path = skywalk/cpu_copy_in_cksum.s; sourceTree = "<group>"; };
-		40DF0F731E5CD7B30035A864 /* cpu_copy_in_cksum_gen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpu_copy_in_cksum_gen.c; path = skywalk/cpu_copy_in_cksum_gen.c; sourceTree = "<group>"; };
 		435F3CA91B06B7BA005ED9EF /* work_interval.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = work_interval.c; sourceTree = "<group>"; };
 		467DAFD3157E8AF200CE68F0 /* guarded_open_np.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = guarded_open_np.c; sourceTree = "<group>"; };
 		4BDD5F1B1891AB2F004BF300 /* mach_approximate_time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mach_approximate_time.c; sourceTree = "<group>"; };
@@ -815,7 +807,6 @@
 				C962B16B18DBA2C80031244A /* setpriority.c */,
 				C6460B7B182025DF00F73CCA /* sfi.c */,
 				24B223B3121DFF12007DAEDE /* sigsuspend-base.c */,
-				401BB7141BCAE523005080D3 /* skywalk */,
 				E4D45C3B16FB20970002AF25 /* spawn */,
 				13B598931A142F5900DB2D5A /* stackshot.c */,
 				E4D7E55216F8776300F92D8D /* string */,
@@ -959,20 +950,6 @@
 				37DDFB7614748713009D3355 /* syscall.map */,
 			);
 			path = arm64;
-			sourceTree = "<group>";
-		};
-		401BB7141BCAE523005080D3 /* skywalk */ = {
-			isa = PBXGroup;
-			children = (
-				405FA3381E0C669D007D66EA /* os_packet.c */,
-				40DD162F1E4ACCAA003297CC /* cpu_copy_in_cksum.s */,
-				409A78301E4EB3D900E0699B /* cpu_in_cksum.s */,
-				40DF0F731E5CD7B30035A864 /* cpu_copy_in_cksum_gen.c */,
-				402AF43E1E5CD88100F1A4B9 /* cpu_in_cksum_gen.c */,
-				401BB7161BCAE539005080D3 /* os_channel.c */,
-				401BB7181BCAE539005080D3 /* os_nexus.c */,
-			);
-			name = skywalk;
 			sourceTree = "<group>";
 		};
 		BA4414B118336D6A00AAE813 /* Generated MIG headers */ = {
@@ -1304,7 +1281,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				403C7CEE1E1F4E4400D6FEEF /* os_packet.c in Sources */,
 				E214BDC81C2E358300CEE8A3 /* clonefile.c in Sources */,
 				C9D9BD19114B00600000D8B9 /* clock_priv.defs in Sources */,
 				C9D9BD1A114B00600000D8B9 /* clock_reply.defs in Sources */,
