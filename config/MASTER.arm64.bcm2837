@@ -5,14 +5,14 @@
 #
 # All rights reserved.  The CMU software License Agreement
 # specifies the terms and conditions for use and redistribution.
-#  
+#
 ######################################################################
 #
 #  Master Apple configuration file (see the master machine independent
 #  configuration file for a description of the file format).
 #
 ######################################################################
-#  
+#
 #  Standard Apple OS Configurations:
 #  -------- ----- -- ---------------
 #
@@ -37,7 +37,7 @@
 #  IOKIT_RELEASE =  [ IOKIT_BASE ]
 #  IOKIT_DEV =      [ IOKIT_BASE iokitstats iotracking ]
 #  IOKIT_DEBUG =    [ IOKIT_BASE iokitstats iotracking]
-#  LIBKERN_BASE =   [ libkerncpp config_kec_fips zlib crypto_sha2 ]
+#  LIBKERN_BASE =   [ libkerncpp config_kec_fips config_blocks zlib crypto_sha2 ]
 #  LIBKERN_RELEASE =[ LIBKERN_BASE ]
 #  LIBKERN_DEV =    [ LIBKERN_BASE iotracking ]
 #  LIBKERN_DEBUG =  [ LIBKERN_BASE iotracking ]
