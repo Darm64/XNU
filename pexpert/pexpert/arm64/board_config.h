@@ -98,7 +98,7 @@
 #define ARM_BOARD_CLASS_T8010
 #define CORE_NCTRS 10
 #if DEVELOPMENT || DEBUG
-#define PMAP_CS                  1
+#define PMAP_CS                  0
 #define PMAP_CS_ENABLE           0
 #endif
 #endif  /* ARM64_BOARD_CONFIG_T8010 */
@@ -165,6 +165,7 @@
 #define __ARM_L2CACHE_SIZE_LOG__ 19
 #define ARM_BOARD_CLASS_BCM2837
 #define CPU_COUNT 4
+#define CORE_NCTRS 8
 #endif  /* ARM64_BOARD_CONFIG_BCM2837 */
 
 #endif /* ! _PEXPERT_ARM_BOARD_CONFIG_H */

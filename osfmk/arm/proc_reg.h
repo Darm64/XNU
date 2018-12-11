@@ -29,28 +29,28 @@
  * @OSF_COPYRIGHT@
  */
 /* CMU_ENDHIST */
-/* 
+/*
  * Mach Operating System
  * Copyright (c) 1991,1990 Carnegie Mellon University
  * All Rights Reserved.
- * 
+ *
  * Permission to use, copy, modify and distribute this software and its
  * documentation is hereby granted, provided that both the copyright
  * notice and this permission notice appear in all copies of the
  * software, derivative works or modified versions, and any portions
  * thereof, and that both notices appear in supporting documentation.
- * 
+ *
  * CARNEGIE MELLON ALLOWS FREE USE OF THIS SOFTWARE IN ITS "AS IS"
  * CONDITION.  CARNEGIE MELLON DISCLAIMS ANY LIABILITY OF ANY KIND FOR
  * ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
- * 
+ *
  * Carnegie Mellon requests users of this software to return to
- * 
+ *
  *  Software Distribution Coordinator  or  Software.Distribution@CS.CMU.EDU
  *  School of Computer Science
  *  Carnegie Mellon University
  *  Pittsburgh PA 15213-3890
- * 
+ *
  * any improvements or extensions that they make and grant Carnegie Mellon
  * the rights to redistribute these changes.
  */
@@ -159,7 +159,7 @@
 #define __ARM64_PMAP_SUBPAGE_L1__ 1
 #define __ARM_KERNEL_PROTECT__ 1
 #define __ARM_GLOBAL_SLEEP_BIT__ 1
-#define __ARM_PAN_AVAILABLE__ 1
+// #define __ARM_PAN_AVAILABLE__ 1
 
 #elif defined (APPLEMONSOON)
 #define	__ARM_ARCH__	8
@@ -239,8 +239,8 @@
  * +-----------------------------------------------------------+
  */
 
-/* 
- * Flags 
+/*
+ * Flags
  */
 #define PSR_NF			0x80000000	/* Negative/Less than */
 #define PSR_ZF			0x40000000	/* Zero */
@@ -305,7 +305,7 @@
 
 
 /*
- * FSR registers 
+ * FSR registers
  *
  * IFSR: Instruction Fault Status Register
  * DFSR: Data Fault Status Register
@@ -559,10 +559,10 @@
 
 #define L2_CSIZE	__ARM_L2CACHE_SIZE_LOG__
 #define L2_CLINE	6
-#define L2_NWAY		4		
-#define L2_I7SET	6		
-#define L2_I7WAY	28		
-#define L2_I9WAY	28		
+#define L2_NWAY		4
+#define L2_I7SET	6
+#define L2_I7WAY	28
+#define L2_I9WAY	28
 #define L2_SWAY	(L2_CSIZE - L2_NWAY)
 #define L2_NSET	(L2_SWAY - L2_CLINE)
 
@@ -596,7 +596,7 @@
  *		WXN				Write permission implies XN
  *		HA				Hardware Access flag enable
  *		RR				Round Robin select
- *		V				High exception vectors 
+ *		V				High exception vectors
  *		I				Instruction cache enable
  *		Z				Branch prediction enable
  *		SW				SWP/SWPB enable
@@ -650,7 +650,7 @@
 /*
  *  NMRR, Normal Memory Remap Register
  *
- *   30  28  26  24  22  20  18  16  14  12  10   8   6   4   2   0 
+ *   30  28  26  24  22  20  18  16  14  12  10   8   6   4   2   0
  * +---------------------------------------------------------------+
  * |OR7|OR6|OR5|OR4|OR3|OR2|OR1|OR0|IR7|IR6|IR5|IR4|IR3|IR2|IR1|IR0|
  * +---------------------------------------------------------------+
@@ -694,7 +694,7 @@
 /*
  * TTBCR: Translation Table Base Control register
  *
- *	31    3 2 0 
+ *	31    3 2 0
  *	+----------+
  *	| zero | N |
  *	+----------+
@@ -717,7 +717,7 @@
 /*
  * ARM Page Granule
  */
-#define ARM_PGSHIFT 12  
+#define ARM_PGSHIFT 12
 #define ARM_PGBYTES (1 << ARM_PGSHIFT)
 #define ARM_PGMASK  (ARM_PGBYTES-1)
 
@@ -837,14 +837,14 @@
  *	+---------+------+-+-+-+---+--+-+----+--+--+--+
  *
  * where:
- *	'G' is the notGlobal bit 
+ *	'G' is the notGlobal bit
  *	'S' is the shared bit
  *	'A' in the access permission extension (APX) bit
  *	'TEX' remap register control bits
  *	'AP' is the access protection
  *	'dom' is the domain for the translation
  *	'XN' is the eXecute Never bit
- *	'CB' is the cache/buffer attribute 
+ *	'CB' is the cache/buffer attribute
  */
 
 #define ARM_TTE_EMPTY				0x00000000					/* unasigned entry */
@@ -935,7 +935,7 @@
  * The following page table entry types are possible:
  *
  *	fault page entry
- *	31                                      2  0 
+ *	31                                      2  0
  *	+----------------------------------------+--+
  *	|    ignored                             |00|
  *	+----------------------------------------+--+
@@ -960,7 +960,7 @@
  *	'TEX' remap register control bits
  *	'AP' is the access protection
  *	'dom' is the domain for the translation
- *	'C' is the cache attribute 
+ *	'C' is the cache attribute
  *	'B' is the write buffer attribute
  */
 
@@ -1154,7 +1154,7 @@
 #define ARM_DBGPRSR_STICKY_POWERDOWN_STATUS	(1 << 1)
 #define ARM_DBGPRSR_POWERUP_STATUS			(1 << 0)
 
-/* 
+/*
  * Format of the OS Lock Access (DBGOSLAR) and Lock Access Registers (DBGLAR)
  */
 #define ARM_DBG_LOCK_ACCESS_KEY				0xC5ACCE55

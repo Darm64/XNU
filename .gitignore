@@ -55,3 +55,5 @@ compile_commands.json
 
 # /tools/tests/zero-to-n
 /tools/tests/zero-to-n/zn*
+BUILD.hdrs
+BUILD

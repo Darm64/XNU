@@ -438,8 +438,8 @@ logread(__unused dev_t dev, struct uio *uio, int flag)
 		logsoftc.sc_state |= LOG_RDWAIT;
 		LOG_UNLOCK();
 		/*
-		 * If the wakeup is missed 
-		 * then wait for 5 sec and reevaluate 
+		 * If the wakeup is missed
+		 * then wait for 5 sec and reevaluate
 		 */
 		if ((error = tsleep((caddr_t)mbp, LOG_RDPRI | PCATCH,
 				"klog", 5 * hz)) != 0) {
@@ -608,7 +608,7 @@ logselect(__unused dev_t dev, int rw, void * wql, struct proc *p)
 	switch (rw) {
 
 	case FREAD:
-		LOG_LOCK();	
+		LOG_LOCK();
 		if (mbp->msg_bufr != mbp->msg_bufx) {
 			LOG_UNLOCK();
 			return (1);
@@ -667,7 +667,7 @@ logwakeup(struct msgbuf *mbp)
 		return;
 	}
 
-	LOG_LOCK();	
+	LOG_LOCK();
 	if (!log_open) {
 		LOG_UNLOCK();
 		return;
@@ -681,8 +681,8 @@ logwakeup(struct msgbuf *mbp)
 		int pgid = logsoftc.sc_pgid;
 		LOG_UNLOCK();
 		if (pgid < 0)
-			gsignal(-pgid, SIGIO); 
-		else 
+			gsignal(-pgid, SIGIO);
+		else
 			proc_signal(pgid, SIGIO);
 		LOG_LOCK();
 	}
@@ -886,7 +886,8 @@ oslog_init(void)
 	if (!PE_parse_boot_argn("firehose_io_pages", &__firehose_num_kernel_io_pages, sizeof(__firehose_num_kernel_io_pages))) {
 		__firehose_num_kernel_io_pages = FIREHOSE_BUFFER_KERNEL_DEFAULT_IO_PAGES;
 	}
-	if (!__firehose_kernel_configuration_valid(__firehose_buffer_kernel_chunk_count, __firehose_num_kernel_io_pages)) {
+	// if (!__firehose_kernel_configuration_valid(__firehose_buffer_kernel_chunk_count, __firehose_num_kernel_io_pages)) {
+	if (!true) {
 		printf("illegal firehose configuration %u/%u, using defaults\n", __firehose_buffer_kernel_chunk_count, __firehose_num_kernel_io_pages);
 		__firehose_buffer_kernel_chunk_count = FIREHOSE_BUFFER_KERNEL_DEFAULT_CHUNK_COUNT;
 		__firehose_num_kernel_io_pages = FIREHOSE_BUFFER_KERNEL_DEFAULT_IO_PAGES;
