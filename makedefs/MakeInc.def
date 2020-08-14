@@ -201,25 +201,34 @@ ARCH_FLAGS_X86_64H	  = -arch x86_64h
 
 ifneq ($(filter ARM ARM64,$(CURRENT_ARCH_CONFIG)),)
 
+ifndef DISABLE_EDM
 ifndef ARCH_STRING_FOR_CURRENT_MACHINE_CONFIG
 export ARCH_STRING_FOR_CURRENT_MACHINE_CONFIG := $(shell $(EMBEDDED_DEVICE_MAP) -db $(EDM_DBPATH) -query SELECT DISTINCT KernelMachOArchitecture FROM Targets WHERE KernelPlatform IS \"$(CURRENT_MACHINE_CONFIG_LC)\" LIMIT 1 || echo UNKNOWN )
+endif
 endif
 
 #
 # This can have false negatives, and is used to avoid calling CTF when we'll build a static KC
 #
+ifndef DISABLE_EDM
 ifndef WILL_BUILD_STATIC_KC
 export WILL_BUILD_STATIC_KC := $(shell $(EMBEDDED_DEVICE_MAP) -db $(EDM_DBPATH)	\
 				-query 'SELECT COUNT(*) != 0 FROM Targets WHERE KernelPlatform IS "$(CURRENT_MACHINE_CONFIG_LC)" \
 					AND (KernelMachOArchitecture LIKE "arm64e" OR ProductType LIKE "iphone10,%")')
+endif
 endif
 
 BUILD_STATIC_LINK := 1
 
 endif
 
+ifndef DISABLE_EDM
 ARCH_FLAGS_ARM		  = -arch $(ARCH_STRING_FOR_CURRENT_MACHINE_CONFIG)
 ARCH_FLAGS_ARM64	  = -arch $(ARCH_STRING_FOR_CURRENT_MACHINE_CONFIG)
+else
+ARCH_FLAGS_ARM		  = -arch arm
+ARCH_FLAGS_ARM64	  = -arch arm64
+endif
 
 #
 # Clang static analyzer flags

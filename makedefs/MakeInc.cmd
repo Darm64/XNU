@@ -151,12 +151,14 @@ SUPPORTED_EMBEDDED_PLATFORMS := iPhoneOS iPhoneOSNano tvOS AppleTVOS WatchOS Bri
 SUPPORTED_SIMULATOR_PLATFORMS := iPhoneSimulator iPhoneNanoSimulator tvSimulator AppleTVSimulator WatchSimulator
 SUPPORTED_PLATFORMS := MacOSX DriverKit $(SUPPORTED_SIMULATOR_PLATFORMS) $(SUPPORTED_EMBEDDED_PLATFORMS)
 
+ifndef DISABLE_EDM
 # Platform-specific tools
 ifneq ($(filter $(SUPPORTED_EMBEDDED_PLATFORMS),$(PLATFORM)),)
 ifeq ($(EMBEDDED_DEVICE_MAP),)
 	export EMBEDDED_DEVICE_MAP := $(shell $(XCRUN) -sdk $(SDKROOT) -find embedded_device_map)
 endif
 EDM_DBPATH ?= $(PLATFORMPATH)/usr/local/standalone/firmware/device_map.db
+endif
 endif
 
 # Scripts or tools we build ourselves
